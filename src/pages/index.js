@@ -1,5 +1,6 @@
 import * as React from "react";
 import Layout from "../components/layout";
+import { StaticImage } from "gatsby-plugin-image";
 
 // // styles
 // const pageStyles = {
@@ -186,6 +187,11 @@ const IndexPage = () => {
   return (
     <Layout pageTitle="Home Page">
       <p>I'm making this by following the Gatsby Tutorial.</p>
+      <StaticImage
+        // External url
+        src="https://static.wikia.nocookie.net/dragonball/images/8/8e/KidGokuPlaysNES.png/revision/latest/scale-to-width-down/1000?cb=20170720120633&path-prefix=pt-br"
+        alt="Goku playing video games."
+      />
     </Layout>
   );
 };
