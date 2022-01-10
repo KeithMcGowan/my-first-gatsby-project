@@ -1,22 +1,22 @@
 import React from "react";
-import Layout from "../components/layout";
-import { graphql } from "gatsby";
-import { MDXRenderer } from "gatsby-plugin-mdx";
+import Layout from "../../components/layout";
+import { graphql, Link } from "gatsby";
 
 const BlogPage = ({ data }) => {
   const { nodes } = data.allMdx;
-
+  
   return (
     <Layout pageTitle="My Blog Posts">
       {nodes.map((eachNode) => {
-        const { id, frontmatter, body } = eachNode;
+        const { id, frontmatter, slug } = eachNode;
         const { title, date } = frontmatter;
-
+        
         return (
           <article key={id}>
-            <h2>{title}</h2>
+            <h2>
+              <Link to={`/blog/${slug}`}>{title}</Link>
+            </h2>
             <p>Posted: {date}</p>
-            <MDXRenderer>{body}</MDXRenderer>
           </article>
         );
       })}
@@ -26,14 +26,14 @@ const BlogPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+    allMdx(sort: {fields: frontmatter___date, order: DESC}) {
       nodes {
         frontmatter {
-          date(formatString: "MMMM D, YYYY")
           title
+          date(formatString: "MMMM D, YYYY")
         }
         id
-        body
+        slug
       }
     }
   }
